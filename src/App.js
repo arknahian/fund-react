@@ -1,70 +1,97 @@
 import './App.css';
 
 function App() {
-  const color = {
-    color : "red",
-    backgroundColor: "yellow",
-    border: "5px solid red"
-  }
+const fontStyle = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: "10px",
+  padding: "10px",
+}
+const actor = {
+  name: "Tom Cruise",
+  age: 50, 
+  movie: "Mission Impossible"
+}
 
-  const products = [
-    {name: "Adobe PhotoShop", price: "$99.32"},
-    {name: "Adobe Illustrations", price: "$44.87"}
-  ]
+const scientists = [
+  {name: "Albert Einstein", invention: "Theory Of Relativity", nationality: "Germany"},
+  {name: "Issac Newton", invention: "Gravity", nationality: "England"},
+  {name: "Nikola Tesla", invention: "Alternative Current", nationality: "USA"},
+  {name: "Galileo Galilei", invention: "Telescope", nationality: "Italy"},
+  {name: "Dr. Jamal Nazrul Islam", invention: "Recreate Big Bang Theory", nationality: "Bangladeshi"},
+  {name: "Stephen Hawking", invention: "Theory Of Everything", nationality: "UK"},
+]
+
+const singers = ["Justin Bieber", "Ed Sheeran", "Eminem", "Rihanna", "Taylor Swift", "Dooja Cat"]
+
+
   return (
     <div className="App">
       <header className="App-header">
- <h1 style={color}>This is a heading</h1>
- <h1 style={{color: "red", backgroundColor: "cyan", border: "10px solid black"}}>This is another heading</h1>
- <Person name="Justin Bieber" profession="Singer" country="Canada"></Person>
- <Person name="Eminem" profession="Rapper" country="USA"></Person>
- <Person name="Obama" profession="Politician" country="USA"></Person>
- <Person name="Messi" profession="Soccer Player" country="Argentina"></Person>
- <Product product={products[0]}></Product>
- <Product product={products[1]}></Product>
- 
+    <h1 style={fontStyle}>this is a heading</h1>
+    <h2 style={fontStyle}>This is heading2</h2>
+    <p style={{color: "red", backgroundColor: "orange"}}>This is a paragraph</p>
 
+    <h2>Name: {actor.name}</h2>
+    <h2>Age: {actor.age}</h2>
+    <h3>Movie: {actor.movie}</h3>
+
+    {/* <Scientist scientist={scientists[0]}></Scientist>
+    <Scientist scientist={scientists[1]}></Scientist>
+    <Scientist scientist={scientists[2]}></Scientist>
+    <Scientist scientist={scientists[3]}></Scientist>
+    <Scientist scientist={scientists[4]}></Scientist> */}
+    
+
+    {
+      scientists.map(s => 
+        <Scientist scientist={s}></Scientist>
+        )
+    }
+
+
+
+
+    {
+      singers.map(singer => 
+        <ul>
+        <li>{singer}</li>
+        </ul>
+      )
+    }
+    
+    
+    
+    
+    
+    
       </header>
     </div>
   );
 }
-function Person(props) {
-  const personStyle = {
-    color: "blue",
-    backgroundColor: "grey",
-    border: "1px solid red",
-    margin: "5px",
-    padding: "5px",
-    borderRadius: "10px",
-  }
-  const nameColor = {
-    color: "green"
-  }
+
+const divStyle ={
+  backgroundColor: "lightgrey",
+  margin: "10px",
+  padding: "10px",
+  color: "black"
+}
+
+function Scientist (props) {
+  const {name, invention, nationality} = props.scientist;
   return (
-    <div style={personStyle}>
-      <h1 style={nameColor}>My name is {props.name}</h1>
-      <h2>I am {props.profession}</h2>
-      <p>I am from {props.country}</p>
-    </div>
+    <div style={divStyle}>
+    <h1>Name: {name}</h1>
+    <h2>Invention: {invention}</h2>
+    <h3>Nationality: {nationality}</h3>
+    {console.log(props)}
+  </div>
   )
 }
 
-const Product = (props) => {
-  const style ={
-    backgroundColor: "lightGrey",
-    color: "green",
-    border: "1px solid red",
-    float: "left",
-    margin: "5px",
-  }
-  const {name, price} = props.product;
-  return(
-    <div style={style}>
-      <h1>{name}</h1>
-      <h2>{price}</h2>
-      <button>Buy now</button>
-    </div>
-  )
-}
+
+
+
+
 
 export default App;
