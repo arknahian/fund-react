@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -28,6 +29,9 @@ const singers = ["Justin Bieber", "Ed Sheeran", "Eminem", "Rihanna", "Taylor Swi
   return (
     <div className="App">
       <header className="App-header">
+    
+    <Counter></Counter>
+
     <h1 style={fontStyle}>this is a heading</h1>
     <h2 style={fontStyle}>This is heading2</h2>
     <p style={{color: "red", backgroundColor: "orange"}}>This is a paragraph</p>
@@ -41,15 +45,12 @@ const singers = ["Justin Bieber", "Ed Sheeran", "Eminem", "Rihanna", "Taylor Swi
     <Scientist scientist={scientists[2]}></Scientist>
     <Scientist scientist={scientists[3]}></Scientist>
     <Scientist scientist={scientists[4]}></Scientist> */}
-    
 
     {
       scientists.map(s => 
         <Scientist scientist={s}></Scientist>
         )
     }
-
-
 
 
     {
@@ -59,11 +60,8 @@ const singers = ["Justin Bieber", "Ed Sheeran", "Eminem", "Rihanna", "Taylor Swi
         </ul>
       )
     }
-    
-    
-    
-    
-    
+
+    <User></User>
     
       </header>
     </div>
@@ -86,6 +84,42 @@ function Scientist (props) {
     <h3>Nationality: {nationality}</h3>
     {console.log(props)}
   </div>
+  )
+}
+
+function Counter(){
+  const [count, setCount] = useState(0);
+  const increaseHandler = () => {
+    const newCount = count + 1;
+    setCount(newCount)
+  }
+  const decreaseHandler = () => {
+    const decreaseCount = count - 1;
+    setCount(decreaseCount)
+  }
+  return (
+    <div>
+      <button onMouseOver={decreaseHandler}>Decrease</button>
+      <h1>Count: {count}</h1>
+      <button onClick={increaseHandler}>Increase</button>
+    </div>
+  )
+}
+
+function User() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/')
+    .then(res => res.json())
+    .then(res => setUsers(res));
+  }, [])
+  return (
+    <div>
+      <h1>Dynamic Users {users.length}</h1>
+      {
+        users.map(user => <li>{user.title}</li>)
+      }
+    </div>
   )
 }
 
